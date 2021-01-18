@@ -11,14 +11,13 @@
 <script>
 export default {
   name: "Header",
-  // props: ["addTodo"],
+  props: ["addTodo"],
   methods: {
     add() {
       const { value } = event.target;
       if (!value.trim()) return alert("错误 重新输入");
       const todo = { id: Date.now(), name: value, done: false };
-      //使用自定义事件
-      this.$emit('add-todo', todo);
+      this.addTodo(todo);
       event.target.value='';
     },
   },

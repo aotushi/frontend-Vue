@@ -1,8 +1,8 @@
 <template>
     <div class="todo-container">
         <div class="todo-wrap">
-            <!-- 头部 自定义事件代替props -->
-            <Header  @add-todo='addTodo'/>
+            <!-- 头部 -->
+            <Header :addTodo="addTodo" />
             <!-- 列表 -->
             <List
                 :todos="todos"
@@ -31,7 +31,7 @@ export default {
         let todos;
         try {
             ///解析localStorage中的数据，如有数据直接使用，无数据null使用空数组。
-            todos = JSON.parse(localData) || [];
+            todos = JSON.parse(localData)||[];
         } catch (error) {
             alert("浏览器缓存异常 数据重置");
             localStorage.clear("todos");
@@ -44,11 +44,8 @@ export default {
     //   localStorage.setItem('todos', JSON.stringify(this.todos))
     // },
     watch: {
-        todos:{
-          deep:true,
-          handler(value){
-            localStorage.setItem('todos', JSON.stringify(value))
-          }
+        todos(value) {
+            localStorage.setItem("todos", JSON.stringify(value));
         }
     },
     methods: {
@@ -134,3 +131,10 @@ body {
     border-radius: 5px;
 }
 </style>
+
+// [
+//       {id:'001', name:'抽烟', done:false},
+//       {id:'002', name:'喝酒', done:true},
+//       {id:'003', name:'烫头', done:false},
+//       {id:'004', name:'代码', done:true}
+//     ]
