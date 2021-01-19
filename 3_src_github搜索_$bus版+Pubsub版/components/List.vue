@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import Pubsub from 'pubsub-js';
 export default {
     name: "List",
     data() {
@@ -26,12 +27,13 @@ export default {
         };
     },
     methods: {
-        saveData(data) {
+        saveData(_, data) {
             this.listInfo={...this.listInfo, ...data}
         },
     },
     mounted() {
-        this.$bus.$on("get-list-data", this.saveData);
+        //this.$bus.$on("get-list-data", this.saveData);
+        Pubsub.subscribe('get-list-data', this.saveData)
     },
 };
 </script>
